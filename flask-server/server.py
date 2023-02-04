@@ -42,19 +42,31 @@ def index():
     # Call Open AI 
     # Return result in JSON format
     prompt = """ Generate an image of """ + request.args.get('country')
-
     response = openai.Image.create(
         prompt = prompt,
         n=1,
         size="1024x1024"
     )
 
-# print(response["data"][0]["url"])
+     # Generate country facts using Chat GPT
+    completions = openai.Completion.create(
+        model = 'text-davinci-003',
+        prompt = """ Tell me 5 facts about """ + request.args.get('country'),
+        max_tokens = 1000
+    )
 
-    return {"pandapics": [ "Panda2", "Panda3"],
+    
+    
+    # print(response["data"][0]["url"])
+
+    return {
         "country":request.args.get('country'),
-        "pictureUrl":response["data"][0]["url"]
+        "pictureUrl":response["data"][0]["url"],
+        "facts":completions.choices[0].text
     }
+
+   
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

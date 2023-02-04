@@ -76,11 +76,10 @@ function App() {
             </Typography>
             <TextField id="outlined-basic" label="Country" variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
             <Button variant="contained" onClick={searchClicked}>Search</Button>
-            <p>{JSON.stringify(data)}</p>
+            {<p>{data.facts}</p>}
+            {/* <p>{JSON.stringify(data)}</p> */}
             {/* If data is true then show image. */}
             {data && <img src={data.pictureUrl}/>}
-
-
           </Container>
         </Box>
       </ThemeProvider>
