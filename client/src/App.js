@@ -9,11 +9,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
 
 
 
-const theme = createTheme();
-
+const lightTheme = createTheme();
+var darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
 function App() {
 
     
@@ -23,6 +28,7 @@ function App() {
     /* setData is the function we can use to manipulate the state of the data variable*/
     /* initial state is useState([{}]) but once we fetch the backend the state of the data variable will change to the data we get from backend */
     const [data, setData] = useState(null);
+    const [theme, setTheme] = useState(lightTheme)
 
     const [searchValue, setSearchValue] = useState("");
 
@@ -49,6 +55,7 @@ function App() {
       <CssBaseline />
         <AppBar position="relative">
             <Toolbar>
+            <Switch defaultChecked onChange={() => setTheme(theme === lightTheme ? darkTheme : lightTheme)} color = "default" />
 
             </Toolbar>
         </AppBar>
