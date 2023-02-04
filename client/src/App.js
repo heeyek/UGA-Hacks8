@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -34,6 +35,10 @@ function App() {
             }
         )
     }, [])
+
+    const searchClicked = (event) => {
+        console.log("Search clicked");
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -65,7 +70,9 @@ function App() {
               the creator, etc. Make it short and sweet, but not too short so folks
               don&apos;t simply skip over it entirely.
             </Typography>
-            
+            <TextField id="outlined-basic" label="Country" variant="outlined" />
+            <Button variant="contained" onClick={searchClicked}>Search</Button>
+
           </Container>
         </Box>
       </ThemeProvider>
