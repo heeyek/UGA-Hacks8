@@ -22,22 +22,26 @@ function App() {
     /* data is the actual variable */
     /* setData is the function we can use to manipulate the state of the data variable*/
     /* initial state is useState([{}]) but once we fetch the backend the state of the data variable will change to the data we get from backend */
-    const [data, setData] = useState([{}])
+    const [data, setData] = useState(null);
+
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
+        
+    }, [])
+
+    const searchClicked = (event) => {
+        console.log(searchValue);
         /* 1. Make API Request */
-        fetch("/pics").then(
+        fetch(`/pics?country=${searchValue}`).then(
             res => res.json()
-        ).then(
+        )
+        .then(
             data => {
                 setData(data)
                 console.log(data)
             }
         )
-    }, [])
-
-    const searchClicked = (event) => {
-        console.log("Search clicked");
     }
 
     return (
@@ -70,8 +74,12 @@ function App() {
               the creator, etc. Make it short and sweet, but not too short so folks
               don&apos;t simply skip over it entirely.
             </Typography>
-            <TextField id="outlined-basic" label="Country" variant="outlined" />
+            <TextField id="outlined-basic" label="Country" variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
             <Button variant="contained" onClick={searchClicked}>Search</Button>
+            <p>{JSON.stringify(data)}</p>
+            {/* If data is true then show image. */}
+            {data && <img src={data.pictureUrl}/>}
+
 
           </Container>
         </Box>
