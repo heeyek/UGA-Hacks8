@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-response = requests.get('https://www.travel-advisory.info/api')
 openai.api_key = os.getenv('OPEN_API_KEY')
 
 # Dict = response.json()
@@ -56,13 +55,23 @@ def index():
     )
 
     
+
+    travelDictionary = requests.get('https://www.travel-advisory.info/api').json()
+    travelAdvisory = "";
+
+    for x in travelDictionary['data']:
+        if travelDictionary['data'][x]['name'] == request.args.get('country'):
+            #print(travelDictionary['data'][x]['name'])
+            travelAdvisory = travelDictionary['data'][x]['advisory']['message']
+            break
     
     # print(response["data"][0]["url"])
 
     return {
         "country":request.args.get('country'),
         "pictureUrl":response["data"][0]["url"],
-        "facts":completions.choices[0].text
+        "facts":completions.choices[0].text,
+        "travelAdvise": travelAdvisory
     }
 
    

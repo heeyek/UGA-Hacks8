@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import LoadingButton from '@mui/lab/LoadingButton';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 
@@ -28,15 +28,14 @@ function App() {
     /* setData is the function we can use to manipulate the state of the data variable*/
     /* initial state is useState([{}]) but once we fetch the backend the state of the data variable will change to the data we get from backend */
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     const [theme, setTheme] = useState(lightTheme)
 
     const [searchValue, setSearchValue] = useState("");
 
-    useEffect(() => {
-        
-    }, [])
-
     const searchClicked = (event) => {
+        setLoading(true);
         console.log(searchValue);
         /* 1. Make API Request */
         fetch(`/pics?country=${searchValue}`).then(
@@ -46,8 +45,10 @@ function App() {
             data => {
                 setData(data)
                 console.log(data)
+                setLoading(false);
             }
         )
+        
     }
 
     return (
@@ -82,8 +83,9 @@ function App() {
               don&apos;t simply skip over it entirely.
             </Typography>
             <TextField id="outlined-basic" label="Country" variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
-            <Button variant="contained" onClick={searchClicked}>Search</Button>
-            {<p style={{"word-wrap": "break-word"}}>{data && data.facts}</p>}
+            { loading ? <LoadingButton variant="contained">Loading...</LoadingButton>: <Button variant="contained" onClick={searchClicked}>Search</Button>}
+            {data && <p>{data.travelAdvise}</p>}
+            {<p style={{"whiteSpace": "pre-line"}}>{data && data.facts}</p>}
             {/* <p>{JSON.stringify(data)}</p> */}
             {/* If data is true then show image. */}
             {data && <img src={data.pictureUrl}/>}
