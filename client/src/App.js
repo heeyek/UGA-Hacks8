@@ -7,10 +7,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
-
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
 
 
 const lightTheme = createTheme();
@@ -64,9 +64,16 @@ function App() {
             bgcolor: 'background.paper',
             pt: 8,
             pb: 6,
+            alignItems: 'center',
+            flexDirection: 'column',
+            display: 'flex'
           }}
         >
+        <img alt="world2" className='img1' src="worldreal.png" width="100" height="100" />
+
+
           <Container maxWidth="sm">
+
             <Typography
               component="h1"
               variant="h2"
@@ -81,13 +88,25 @@ function App() {
               the creator, etc. Make it short and sweet, but not too short so folks
               don&apos;t simply skip over it entirely.
             </Typography>
-            <TextField id="outlined-basic" label="Country" variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
-            <Button variant="contained" onClick={searchClicked}>Search</Button>
-            {<p style={{"word-wrap": "break-word"}}>{data && data.facts}</p>}
-            {/* <p>{JSON.stringify(data)}</p> */}
+           
+                  <Paper
+      component="form"
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 550 }}
+    >
+                  <TextField id="outlined-basic" label="Country" fullWidth variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
+
+      
+      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+      <Button variant="text" onClick={searchClicked}>Search</Button>
+
+    </Paper>
+            {/*<p>{JSON.stringify(data)}</p>*/}
             {/* If data is true then show image. */}
             {data && <img src={data.pictureUrl}/>}
+
+
           </Container>
+
         </Box>
       </ThemeProvider>
     )
