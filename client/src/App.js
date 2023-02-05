@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
@@ -30,10 +31,10 @@ function App() {
     /* initial state is useState([{}]) but once we fetch the backend the state of the data variable will change to the data we get from backend */
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
-
     const [theme, setTheme] = useState(lightTheme)
-
     const [searchValue, setSearchValue] = useState("");
+
+
 
     const searchClicked = (event) => {
         setLoading(true);
@@ -58,7 +59,6 @@ function App() {
         <AppBar position="relative">
             <Toolbar>
             <Switch defaultChecked onChange={() => setTheme(theme === lightTheme ? darkTheme : lightTheme)} color = "default" />
-
             </Toolbar>
         </AppBar>
         <Box
@@ -90,14 +90,20 @@ function App() {
               the creator, etc. Make it short and sweet, but not too short so folks
               don&apos;t simply skip over it entirely.
             </Typography>
-            {/* <TextField id="outlined-basic" label="Country" variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/> */}
+            {/* <TextField id="outlined-basic" label="Country" fullWidth variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/> */}
+            {/* <Button variant="text" onClick={searchClicked}>Search</Button> */}
+
             <TextField id="outlined-basic" label="Country" fullWidth variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/>
-            { loading ? <LoadingButton variant="contained">Loading...</LoadingButton>: <Button variant="contained" onClick={searchClicked}>Search</Button>}
+            <Button variant="contained" onClick={searchClicked}>Search</Button>
+
+            {/* { loading ? <LoadingButton variant="contained">Loading...</LoadingButton>: <Button variant="contained" onClick={searchClicked}>Search</Button>} */}
+            {<p style={{"whiteSpace": "pre-line"}}>{data && data.facts}</p>}
             {data && <p>{data.travelAdvise}</p>}
             <Paper component="form" sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 550 }}>
-            {<p style={{"whiteSpace": "pre-line"}}>{data && data.facts}</p>}
+            {/* {<p style={{"whiteSpace": "pre-line"}}>{data && data.facts}</p>} */}
             {/* <p>{JSON.stringify(data)}</p> */}
       
+
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
             </Paper>
@@ -105,7 +111,7 @@ function App() {
             {/* <Button variant="text" onClick={searchClicked}>Search</Button> */}
             {/*<p>{JSON.stringify(data)}</p>*/}
             {/* If data is true then show image. */}
-            {data && <img src={data.pictureUrl}/>}
+            {data && <img src={data.pictureUrl} height="540" width="550" />}
 
 
           </Container>
