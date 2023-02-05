@@ -83,12 +83,12 @@ function App() {
               color="text.primary"
               gutterBottom
             >
-              Album layout
+              Let's go on an adventure!
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
+              Hello! This is your tour guide Byte. I am here to take you on an adventure.
+              Tell me a country that you want to go. 
+              I will tell you how that country is for traveling and tell you some cool facts.
             </Typography>
             {/* <TextField id="outlined-basic" label="Country" fullWidth variant="outlined" value={searchValue} onChange={(event)=> setSearchValue(event.target.value)}/> */}
             {/* <Button variant="text" onClick={searchClicked}>Search</Button> */}
